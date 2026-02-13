@@ -5,17 +5,27 @@ const WaitlistForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-
     setStatus('loading');
-    
-    // Simulate API call
-    setTimeout(() => {
-      setStatus('success');
-      setEmail('');
-    }, 1500);
+    try {
+      const response = await fetch('https://formspree.io/f/xjgeypgo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        setStatus('success');
+        setEmail('');
+      } else {
+        setStatus('idle');
+        alert('Something went wrong. Please try again.');
+      }
+    } catch {
+      setStatus('idle');
+      alert('Something went wrong. Please try again.');
+    }
   };
 
   if (status === 'success') {
@@ -34,9 +44,7 @@ const WaitlistForm: React.FC = () => {
 
   return (
     <div className="w-full max-w-md mx-auto relative group">
-        {/* Glow Effect behind form */}
         <div className="absolute -inset-1 bg-gradient-to-r from-igdrasil-accent/0 via-igdrasil-accent/30 to-igdrasil-accent/0 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-        
         <form onSubmit={handleSubmit} className="relative flex items-center">
           <input
             type="email"
