@@ -22,10 +22,10 @@ const OrganicBackground: React.FC = () => {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.1,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        size: Math.random() * 2 + 1,
+        alpha: Math.random() * 0.4 + 0.1,
       });
     }
 
@@ -47,7 +47,7 @@ const OrganicBackground: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p.alpha * 0.4})`; // Emerald hint
+        ctx.fillStyle = `rgba(163, 230, 53, ${p.alpha * 0.5})`; // Soft yellow-green
         ctx.fill();
 
         // Draw connections (roots)
@@ -61,7 +61,7 @@ const OrganicBackground: React.FC = () => {
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             const opacity = (1 - distance / 150) * 0.15;
-            ctx.strokeStyle = `rgba(52, 211, 153, ${opacity})`; // Lighter emerald connection
+            ctx.strokeStyle = `rgba(163, 230, 53, ${opacity * 1.5})`; 
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -92,7 +92,7 @@ const OrganicBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ background: 'linear-gradient(to bottom, #050505, #0a0a0a)' }}
+      style={{ background: 'linear-gradient(to bottom, #faf9f6, #f5f5f4)' }}
     />
   );
 };
