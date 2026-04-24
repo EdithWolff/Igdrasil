@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Reference material — large binary assets kept locally only
+reference/twenty-website-new/public/images/
+reference/twenty-website-new/public/illustrations/
+reference/twenty-website-new/output/
